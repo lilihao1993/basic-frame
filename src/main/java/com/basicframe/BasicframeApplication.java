@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages = "com.basicframe.*.mapper")
 public class BasicframeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BasicframeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BasicframeApplication.class, args);
+    }
 }
