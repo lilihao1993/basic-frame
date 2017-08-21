@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by Administrator on 2017/8/21.
+ * 拦截器.
  */
 public class MyInterceptor implements HandlerInterceptor {
 
@@ -22,6 +22,15 @@ public class MyInterceptor implements HandlerInterceptor {
      */
     Logger logger = LoggerFactory.getLogger(MyInterceptor.class);
 
+    /**
+     * 描述：预处理（在处理请求之前处理）
+     *
+     * @param httpServletRequest  request 请求
+     * @param httpServletResponse response 响应
+     * @param o
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         User user = (User) httpServletRequest.getSession().getAttribute(Constant.SESSION_USER_INFO);
@@ -38,11 +47,30 @@ public class MyInterceptor implements HandlerInterceptor {
         return true;
     }
 
+    /**
+     * 描述：后处理（在处理请求之后处理）
+     *
+     * @param httpServletRequest  request 请求
+     * @param httpServletResponse response 响应
+     * @param o                   对象
+     * @param modelAndView        视图
+     * @throws Exception
+     */
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
 
     }
 
+
+    /**
+     * 描述：完成后 （完成后处理）
+     *
+     * @param httpServletRequest  request 请求
+     * @param httpServletResponse response 响应
+     * @param o                   对象
+     * @param e                   异常
+     * @throws Exception
+     */
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
 
