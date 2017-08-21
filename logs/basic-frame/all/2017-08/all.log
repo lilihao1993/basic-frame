@@ -1,1 +1,0 @@
-2017-08-08 09:23:00,493 [main] ERROR org.apache.velocity.runtime.log.Log4JLogChute - ResourceManager : unable to find resource '/template/list.jsp.vm' in any resource loader.

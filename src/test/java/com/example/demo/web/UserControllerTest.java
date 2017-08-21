@@ -1,7 +1,7 @@
 package com.example.demo.web;
 
 import com.basicframe.BasicframeApplication;
-import com.basicframe.demo.web.UserController;
+import com.basicframe.system.web.UserController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
