@@ -1,39 +1,20 @@
 package com.basicframe.common.utils;
 
-import java.net.URLEncoder;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.regex.Pattern;
+import com.basicframe.common.utils.icinfo.IcinfoStringUtil;
 
-public class StringUtils extends org.springframework.util.StringUtils {
-    public StringUtils() {
-    }
+import java.util.Date;
 
-    public static String maptToUrlParam(Map<String, Object> paramMap, String encode) throws Exception {
-        String params = "";
-        Set paramKey = paramMap.keySet();
-        Iterator it = paramKey.iterator();
+/**
+ * Created by Administrator on 2017/8/23.
+ */
+public class StringUtils extends IcinfoStringUtil {
 
-        while (it.hasNext()) {
-            String tempKey = (String) it.next();
-            String tempValue = paramMap.get(tempKey) != null ? URLEncoder.encode(paramMap.get(tempKey).toString(), encode) : "";
-            if (params.equals("")) {
-                params = tempKey + "=" + tempValue;
-            } else {
-                params = params + "&" + tempKey + "=" + tempValue;
-            }
-        }
-
-        return params;
-    }
 
     /**
      * 数组转成字符串
      *
-     * @param arrObject 数组对象
-     * @param separator 分隔符
+     * @param arrObject  数组对象
+     * @param separator  分隔符
      * @return
      */
     public static String arrayToString(Object[] arrObject, String separator) {
@@ -56,116 +37,40 @@ public class StringUtils extends org.springframework.util.StringUtils {
         return returnStrValue;
     }
 
-    public static String assemblyString(String... strParam) {
-        StringBuffer stringBuffer = new StringBuffer();
-        String[] arr$ = strParam;
-        int len$ = strParam.length;
 
-        for (int i$ = 0; i$ < len$; ++i$) {
-            String string = arr$[i$];
-            stringBuffer.append(string);
+    /**
+     * 字符串长度达到一定长度截取固定长度的子串
+     *
+     * @param str 截取原始字符串
+     * @param max 字符串最大长度校验
+     * @param sub 需要截取的子串长度
+     * @return 截取后的子串
+     */
+    public static String subString(String str, int max, int sub) {
+        // 为空，则直接返回
+        if (isBlank(str)) {
+            return str;
         }
 
-        return stringBuffer.toString();
-    }
-
-    public static String uuid() {
-        return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
-    }
-
-    public static boolean isNumeric(Object obj) {
-        if (obj == null) {
-            return false;
-        } else {
-            char[] chars = obj.toString().toCharArray();
-            int length = chars.length;
-            if (length < 1) {
-                return false;
-            } else {
-                int i = 0;
-                if (length > 1 && chars[0] == 45) {
-                    i = 1;
-                }
-
-                while (i < length) {
-                    if (!Character.isDigit(chars[i])) {
-                        return false;
-                    }
-
-                    ++i;
-                }
-
-                return true;
-            }
+        // 小于指定最大长度，直接返回
+        if (str.length() <= max) {
+            return str;
         }
+
+        // 截取固定长度子串
+        return substring(str, 0, sub >= str.length() ? str.length() : sub);
     }
 
-    public static String[] replaceDanger(String[] values) {
-        if (values == null) {
-            return null;
-        } else {
-            int count = values.length;
-            String[] _values = new String[count];
-
-            for (int i = 0; i < count; ++i) {
-                _values[i] = replaceDanger(values[i]);
-            }
-
-            return _values;
+    /**
+     * 拼接url
+     *
+     * @param url url
+     * @return 拼接后的url
+     */
+    public static String jointUrl(String url) {
+        if (url.indexOf("?") < 0) {
+            url = IcinfoStringUtil.assemblyString(url, "?_t=" + new Date().getTime());
         }
-    }
-
-    public static String replaceDanger(String value) {
-        if (!isEmpty(value) && isDanger(value)) {
-            char[] chars = value.toCharArray();
-            StringBuffer sb = new StringBuffer();
-
-            for (int i = 0; i < chars.length; ++i) {
-                char c = chars[i];
-                switch (c) {
-                    case '\"':
-                        sb.append("&quot;");
-                        break;
-                    case '\'':
-                        sb.append("&#39;");
-                        break;
-                    case '<':
-                        sb.append("&lt;");
-                        break;
-                    case '>':
-                        sb.append("&gt;");
-                        break;
-                    default:
-                        sb.append(c);
-                }
-            }
-
-            return sb.toString();
-        } else {
-            return value;
-        }
-    }
-
-    public static String[] escapeDanger(String[] values) {
-        if (values == null) {
-            return null;
-        } else {
-            int count = values.length;
-            String[] _values = new String[count];
-
-            for (int i = 0; i < count; ++i) {
-                _values[i] = escapeDanger(values[i]);
-            }
-
-            return _values;
-        }
-    }
-
-    public static String escapeDanger(String value) {
-        return !isEmpty(value) && isDanger(value) ? value.replaceAll("(?<!\\\\)\'", "\\\\\'") : value;
-    }
-
-    public static boolean isDanger(String str) {
-        return isEmpty(str) ? false : Pattern.compile("[\'|\"|\\|<|>]").matcher(str).find();
+        return url;
     }
 }

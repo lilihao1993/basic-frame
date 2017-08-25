@@ -1,6 +1,8 @@
 package com.basicframe.common.utils;
 
-import com.icinfo.framework.tools.utils.HttpClientUtil;
+
+import com.basicframe.common.utils.icinfo.HttpsClientUtil;
+import com.basicframe.common.utils.icinfo.IcinfoStringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,12 +11,11 @@ import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Http请求工具封装.
  */
-public class HttpUtils extends HttpClientUtil {
+public class HttpUtils extends HttpsClientUtil {
     /**
      * 获取 request 中所有参数
      *

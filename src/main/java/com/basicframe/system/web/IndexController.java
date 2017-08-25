@@ -28,8 +28,7 @@ public class IndexController {
      */
     @RequestMapping(value = "/")
     public String login(Model model) throws Exception {
-        model.addAttribute("name","张三");
-
+        model.addAttribute("ref", "client");
         return "login";
     }
 

@@ -1,6 +1,7 @@
 package com.basicframe.common.utils;
 
 
+import com.basicframe.common.utils.icinfo.IcinfoStringUtil;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
@@ -19,7 +20,7 @@ public class EncryptUtils extends Md5Utils {
      * @throws UnsupportedEncodingException
      */
     public static String base64Encoder(String str, String charset) throws UnsupportedEncodingException {
-        if (StringUtils.isEmpty(charset)) {
+        if (IcinfoStringUtil.isEmpty(charset)) {
             charset = "utf-8";
         }
         return new String(Base64.encodeBase64(str.getBytes(charset)), charset);
@@ -34,7 +35,7 @@ public class EncryptUtils extends Md5Utils {
      * @throws UnsupportedEncodingException
      */
     public static String base64Decoder(String str, String charset) throws UnsupportedEncodingException {
-        if (StringUtils.isEmpty(charset)) {
+        if (IcinfoStringUtil.isEmpty(charset)) {
             charset = "utf-8";
         }
         return new String(Base64.decodeBase64(str), charset);

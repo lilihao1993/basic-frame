@@ -28,7 +28,8 @@ require.config({
         'pace': 'lib/pace/pace.min',
         'select2': 'lib/select2/select2.min',
         'jquery.nanoscroller': 'lib/jquery/jquery.nanoscroller.min',
-        'mydate': 'lib/mydate97/WdatePicker'
+        'mydate': 'lib/mydate97/WdatePicker',
+        'h-admin': 'lib/h-admin/H-ui.admin'
     },
     shim: {
         'bootstrap': {
@@ -56,13 +57,13 @@ require.config({
             deps: ['jquery.dataTables']
         },
         'buttons.print': {
-            deps: ['jquery.dataTables','dataTables.buttons']
+            deps: ['jquery.dataTables', 'dataTables.buttons']
         },
         'buttons.flash': {
-            deps: ['jquery.dataTables','dataTables.buttons']
+            deps: ['jquery.dataTables', 'dataTables.buttons']
         },
         'buttons.html5': {
-            deps: ['jquery.dataTables','dataTables.buttons']
+            deps: ['jquery.dataTables', 'dataTables.buttons']
         },
         'ztree': {
             deps: ['jquery']
@@ -77,6 +78,9 @@ require.config({
             deps: ['jquery']
         },
         'select2': {
+            deps: ['jquery']
+        },
+        'h-admin': {
             deps: ['jquery']
         }
     },

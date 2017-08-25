@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* 你自己的样式 */
+
+.error-box {
+    top: 10px;
+    left: 25%;
+    color: #ff0000;
+    font-size: 12px;
+    line-height: 30px;
+}
