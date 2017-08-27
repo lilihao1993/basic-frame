@@ -3,11 +3,13 @@
  */
 package com.basicframe.system.web;
 
+import com.basicframe.common.remote.ajax.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * 描述: 系统管理首页控制器 .<br>
@@ -42,5 +44,4 @@ public class IndexController {
     public String index() throws Exception {
         return "index";
     }
-
 }

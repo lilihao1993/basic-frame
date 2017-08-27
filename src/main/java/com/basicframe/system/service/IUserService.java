@@ -14,4 +14,13 @@ import com.basicframe.system.entity.User;
  */
 public interface IUserService extends IService<User> {
 
+    /**
+     * 描述：是否登录成功
+     *
+     * @param userName 用户名
+     * @param password 密码
+     * @return true：登录成功  false：登录失败
+     * @throws Exception
+     */
+    boolean isLoginSuccess(String userName, String password) throws Exception;
 }

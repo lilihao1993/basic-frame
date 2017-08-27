@@ -24,7 +24,8 @@ require(['component/iframeLayer',
                 //1.判断验证码是否验证成功
                 var data = _verificationCode($("#checkCode").val());
                 if (data == 'success') {
-                    layer.alert("验证成功！");
+                    //2.验证用户名以及密码
+                    _login($('userName').val(),$('password').val());
                 } else {
                     layer.alert("验证失败！");
                 }
@@ -121,6 +122,29 @@ require(['component/iframeLayer',
                 layer.alert('错误');
             }
         })
+    }
+
+    /**
+    *用户登录
+    */
+    function _login(userName,password){
+        http.httpRequest({
+            url: '/login',
+            type: "post",
+            data: {userName: userName,password:password},
+            success: function (data) {
+               if(data.status == 'success'){
+                    //登录成功跳转到后台页
+
+               }else{
+                    //弹出提示框
+                    layer.alert('用户名或密码错误！');
+               }
+            },
+            error: function () {
+                layer.alert('错误');
+            }
+        });
     }
 
 });
