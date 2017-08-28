@@ -14,9 +14,6 @@
     <title>基础框架 后台登录</title>
     <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
     <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
-    <!--[if IE 6]-->
-    <script type="text/javascript" src="/static/js/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
-    <script>DD_belatedPNG.fix('*');</script>
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />

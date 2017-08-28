@@ -22,13 +22,7 @@ require(['component/iframeLayer',
         $.validator.setDefaults({
             submitHandler: function () {
                 //1.判断验证码是否验证成功
-                var data = _verificationCode($("#checkCode").val());
-                if (data == 'success') {
-                    //2.验证用户名以及密码
-                    _login($('userName').val(),$('password').val());
-                } else {
-                    layer.alert("验证失败！");
-                }
+                _verificationCode($("#checkCode").val());
 
             }
         });
@@ -111,35 +105,41 @@ require(['component/iframeLayer',
      * @private success：失败，fail 成功
      */
     function _verificationCode(code) {
+        var userName = $('userName').val();
         http.httpRequest({
             url: '/verify/validate',
             type: "get",
             data: {verifyCode: code},
             success: function (data) {
-                return data.status;
+                if (data.status == 'success') {
+                    _login($('#userName').val(), $('#password').val());
+                } else {
+                    layer.alert("验证失败！");
+                }
             },
             error: function () {
                 layer.alert('错误');
             }
-        })
+        });
+
     }
 
     /**
-    *用户登录
-    */
-    function _login(userName,password){
+     *用户登录
+     */
+    function _login(userName, password) {
         http.httpRequest({
             url: '/login',
             type: "post",
-            data: {userName: userName,password:password},
+            data: {userName: userName, password: password},
             success: function (data) {
-               if(data.status == 'success'){
+                if (data.status == 'success') {
                     //登录成功跳转到后台页
-
-               }else{
+                    top.location = "/admin/index";
+                } else {
                     //弹出提示框
                     layer.alert('用户名或密码错误！');
-               }
+                }
             },
             error: function () {
                 layer.alert('错误');

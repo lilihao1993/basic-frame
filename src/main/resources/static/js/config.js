@@ -29,7 +29,9 @@ require.config({
         'select2': 'lib/select2/select2.min',
         'jquery.nanoscroller': 'lib/jquery/jquery.nanoscroller.min',
         'mydate': 'lib/mydate97/WdatePicker',
-        'h-admin': 'lib/h-admin/H-ui.admin'
+        'h-admin': 'lib/h-admin/H-ui.admin',
+        'h-ui': 'lib/h-ui/H-ui.min',
+        'jquery.contextmenu': 'lib/jquery.contextmenu/jquery.contextmenu.r2'
     },
     shim: {
         'bootstrap': {
@@ -81,6 +83,11 @@ require.config({
             deps: ['jquery']
         },
         'h-admin': {
+            deps: ['jquery']
+        },
+        'h-ui': {
+            deps: ['jquery']
+        }, 'jquery.contextmenu': {
             deps: ['jquery']
         }
     },
