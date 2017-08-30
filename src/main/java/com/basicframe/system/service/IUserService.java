@@ -21,4 +21,15 @@ public interface IUserService extends IService<User> {
      * @throws Exception
      */
     User getByUserName(String userName) throws Exception;
+
+//    /**
+//     * 描述：分页获取用户列表
+//     *
+//     * @param request 分页响应
+//     * @return
+//     * @throws Exception
+//     */
+//    List<User> pageUsers(PageRequest request) throws Exception;
+
+
 }

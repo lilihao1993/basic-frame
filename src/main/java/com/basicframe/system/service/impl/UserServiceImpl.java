@@ -38,4 +38,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         user.setUserName(userName);
         return userMapper.selectOne(user);
     }
+
+//    /**
+//     * 描述：分页获取用户列表
+//     *
+//     * @param request 分页响应
+//     * @return
+//     * @throws Exception
+//     */
+//    @Override
+//    public List<User> pageUsers(PageRequest request) throws Exception {
+//        //1.获取用户列表
+//        PageHelper.startPage(request.getPageNum(), request.getLength());
+//        return userMapper.selectByMap(request.getParams());
+//    }
 }

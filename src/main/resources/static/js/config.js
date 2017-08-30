@@ -30,8 +30,11 @@ require.config({
         'jquery.nanoscroller': 'lib/jquery/jquery.nanoscroller.min',
         'mydate': 'lib/mydate97/WdatePicker',
         'h-admin': 'lib/h-admin/H-ui.admin',
-        'h-ui': 'lib/h-ui/H-ui.min',
-        'jquery.contextmenu': 'lib/jquery.contextmenu/jquery.contextmenu.r2'
+        'h-ui': 'lib/h-ui/H-ui.min.js',
+        'jquery.contextmenu': 'lib/jquery.contextmenu/jquery.contextmenu.r2',
+        'h-jquery': 'lib/jquery/jquery-1.12.3.min',
+        'laypage': 'lib/laypage/1.2/laypage',
+        'icheck':'lib/icheck/jquery.icheck.min'
     },
     shim: {
         'bootstrap': {
@@ -83,11 +86,13 @@ require.config({
             deps: ['jquery']
         },
         'h-admin': {
-            deps: ['jquery']
+            deps: ['h-jquery']
         },
         'h-ui': {
-            deps: ['jquery']
+            deps: ['h-jquery']
         }, 'jquery.contextmenu': {
+            deps: ['h-jquery']
+        }, 'icheck': {
             deps: ['jquery']
         }
     },
