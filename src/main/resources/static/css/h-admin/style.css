@@ -8,3 +8,7 @@
     font-size: 12px;
     line-height: 30px;
 }
+
+.table > tbody > tr > td {
+    text-align: center;
+}
