@@ -31,5 +31,13 @@ public interface IUserService extends IService<User> {
 //     */
 //    List<User> pageUsers(PageRequest request) throws Exception;
 
+    /**
+     * 描述：编辑用户
+     *
+     * @param user 用户对象
+     * @throws Exception
+     */
+    void editUser(User user) throws Exception;
+
 
 }

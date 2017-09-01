@@ -4,7 +4,8 @@ require(['component/iframeLayer',
     'laydate',
     'icheck',
     'jquery.validate',
-    'common/validateRules'], function (layer, util, http, laydate) {
+    'common/validateRules',
+    'jquery.serialize'], function (layer, util, http, laydate) {
 
 
     init();
@@ -26,33 +27,33 @@ require(['component/iframeLayer',
     function _formValid() {
         $.validator.setDefaults({
             submitHandler: function () {
-                //1.判断验证码是否验证成功
-                _verificationCode($("#checkCode").val());
+                //1.编辑用户
+                _editUser();
 
             }
         });
 
-        $('#loginForm').validate({
+        $('#form-user-edit').validate({
             rules: {
                 userName: {
                     isNotBlank: true,
                     maxlength: 50
                 },
-                phone: {
+                mobile: {
                     isNotBlank: true,
-                    maxlength: 11
+                    isPhone: true
                 },
-                email: {
+                mail: {
                     isNotBlank: true,
-                    maxlength: 11
+                    maxlength: 50,
+                    email: true
                 },
                 wechat: {
                     isNotBlank: true,
-                    maxlength: 11
+                    maxlength: 20
                 },
                 dirthday: {
-                    isNotBlank: true,
-                    maxlength: 11
+                    isNotBlank: true
                 }
             },
 
@@ -61,21 +62,21 @@ require(['component/iframeLayer',
                     isNotBlank: '用户名不可为空',
                     maxlength: '用户名长度在50字符内'
                 },
-                phone: {
-                    isNotBlank: '密码不可为空',
-                    maxlength: '密码长度在50字符内'
+                mobile: {
+                    isNotBlank: '手机号不可为空',
+                    isPhone: '请输入正确的手机号'
                 },
-                email: {
-                    isNotBlank: '验证码不可为空',
-                    maxlength: '验证码长度在50字符内'
+                mail: {
+                    isNotBlank: '邮箱不可为空',
+                    maxlength: '邮箱长度在50字符内',
+                    email: '您输入的邮箱有误'
                 },
                 wechat: {
-                    isNotBlank: '验证码不可为空',
-                    maxlength: '验证码长度在50字符内'
+                    isNotBlank: '微信号不可为空',
+                    maxlength: '微信号长度在20字符内'
                 },
                 dirthday: {
-                    isNotBlank: '验证码不可为空',
-                    maxlength: '验证码长度在50字符内'
+                    isNotBlank: '生日不可为空'
                 }
             },
 
@@ -135,6 +136,28 @@ require(['component/iframeLayer',
         laydate.render({
             elem: '#dirthday' //指定元素
         });
-
     }
+
+    /**
+     * 描述：编辑用户
+     * @private
+     */
+    function _editUser() {
+        http.httpRequest({
+            url: '/admin/system/user/edit',
+            type: "post",
+            data: $('#form-user-edit').serialize(),
+            success: function (data) {
+                if (data.status == 'success') {
+                    parent.layer.closeAll();
+                } else {
+                    layer.alert('用户编辑失败!');
+                }
+            },
+            error: function () {
+                layer.alert('错误');
+            }
+        });
+    }
+
 });

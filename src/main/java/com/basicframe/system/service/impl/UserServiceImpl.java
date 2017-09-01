@@ -1,11 +1,14 @@
 package com.basicframe.system.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.basicframe.common.utils.StringUtils;
 import com.basicframe.system.entity.User;
 import com.basicframe.system.mapper.UserMapper;
 import com.basicframe.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -52,4 +55,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 //        PageHelper.startPage(request.getPageNum(), request.getLength());
 //        return userMapper.selectByMap(request.getParams());
 //    }
+
+    /**
+     * 描述：编辑用户
+     *
+     * @param user 用户对象
+     * @throws Exception
+     */
+    @Override
+    public void editUser(User user) throws Exception {
+        //1.如果id为空，则是新增操作，否则为修改操作
+        user.setOperateTime(new Date());
+        if (StringUtils.isBlank(user.getId())) {
+            user.setCreateTime(new Date());
+            userMapper.insert(user);
+        } else {
+            userMapper.updateById(user);
+        }
+    }
 }

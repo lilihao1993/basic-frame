@@ -86,9 +86,9 @@ require(['layer1',
                 parent.layer.open({
                     type: 2,
                     title: ['新增用户', 'font-size:18px;color:#07538f;background:#e4f6fb;'],
-                    area: ['60%', '70%'],
+                    area: ['65%', '80%'],
                     content: ['/admin/system/user/add'],
-                    callback: function () {
+                    end: function () {
                         table.ajax.reload();
                     }
                 });
@@ -113,7 +113,7 @@ require(['layer1',
             event: 'click',
             handler: function () {
                 var id = $(this).data('id');
-                layer.confirm("确认删除吗？", {icon: 3}, function () {
+                parent.layer.confirm("确认删除吗？", {icon: 3}, function () {
                     _delete(id);
                 });
             }
@@ -147,18 +147,18 @@ require(['layer1',
      */
     function _delete(id) {
         http.httpRequest({
-            url: '/admin/collect/item/delete/' + id,
+            url: '/admin/system/user/delete/' + id,
             type: "post",
             success: function (data) {
                 if (data.status == 'success') {
-                    layer.closeAll();
+                    parent.layer.closeAll();
                     table.ajax.reload();
                 } else {
-                    layer.alert(data.msg);
+                    parent.layer.alert(data.msg);
                 }
             },
             error: function () {
-                layer.alert('错误');
+                parent.layer.alert('错误');
             }
         });
     }

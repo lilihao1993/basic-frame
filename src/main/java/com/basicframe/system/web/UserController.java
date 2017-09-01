@@ -10,12 +10,10 @@ import com.basicframe.system.entity.User;
 import com.basicframe.system.service.IUserService;
 import com.basicframe.system.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -119,9 +117,10 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public AjaxResult edit(User user) throws Exception {
+        userService.editUser(user);
         return AjaxResult.success("编辑成功！");
     }
 

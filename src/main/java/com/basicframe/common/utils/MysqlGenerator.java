@@ -93,6 +93,7 @@ public class MysqlGenerator {
         gc.setBaseColumnList(false);// XML columList
         gc.setAuthor(AUTHOR);
 
+
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         // gc.setMapperName("%sDao");
         // gc.setXmlName("%sDao");
@@ -100,7 +101,6 @@ public class MysqlGenerator {
         // gc.setServiceImplName("%sServiceDiy");
         // gc.setControllerName("%sAction");
         mpg.setGlobalConfig(gc);
-
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);

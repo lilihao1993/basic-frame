@@ -26,61 +26,68 @@
 </head>
 <body>
 <article class="page-container">
-    <form action="" class="form form-horizontal" id="form-user-add">
-        <div class="row cl">
-            <label class="form-label col-xs-4 "><span class="c-red">*</span>用户名：</label>
-            <div class="formControls col-xs-8 ">
-                <input type="text" class="input-text" value="<#if user??>${user.userName!''}</#if>" placeholder="" id="username" name="username">
+    <form action="" class="form form-horizontal" id="form-user-edit">
+        <div class="row c1">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-8">
+                <input type="hidden" name="id" value="<#if user??>${user.id!''}</#if>">
+                <div class="error-box"></div>
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 "><span class="c-red">*</span>性别：</label>
+            <label class="form-label col-xs-3 "><span class="c-red">*</span>用户名：</label>
+            <div class="formControls col-xs-8">
+                <input type="text" class="input-text" maxlength="20" value="<#if user??>${user.userName!''}</#if>" placeholder="" id="username" name="userName">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-3 "><span class="c-red">*</span>性别：</label>
             <div class="formControls col-xs-8 skin-minimal">
                 <div class="radio-box">
-                    <input name="sex" type="radio"  id="sex-1" <#if user??>${(user.sex == '1')?string('checked','')}<#else> checked </#if> >
+                    <input name="sex" type="radio" value="1"  id="sex-1" <#if user??>${(user.sex == '1')?string('checked','')}<#else> checked </#if> >
                     <label for="sex-1">男</label>
                 </div>
                 <div class="radio-box">
-                    <input type="radio" id="sex-2" name="sex" <#if user??>${(user.sex == '0')?string('checked','')}</#if>>
+                    <input type="radio" id="sex-2" value="0" name="sex" <#if user??>${(user.sex == '0')?string('checked','')}</#if>>
                     <label for="sex-2">女</label>
                 </div>
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 "><span class="c-red">*</span>手机：</label>
-            <div class="formControls col-xs-8 ">
-                <input type="text" class="input-text" value="<#if user??>${user.phone!''}</#if>" placeholder="" id="mobile" name="phone">
+            <label class="form-label col-xs-3 "><span class="c-red">*</span>手机：</label>
+            <div class="formControls col-xs-8">
+                <input type="text" class="input-text" maxlength="11" value="<#if user??>${user.phone!''}</#if>" placeholder="" id="mobile" name="mobile">
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 "><span class="c-red">*</span>邮箱：</label>
-            <div class="formControls col-xs-8 ">
-                <input type="text" class="input-text" placeholder="@" name="email" value="<#if user??>${user.mail!''}</#if>" id="email">
+            <label class="form-label col-xs-3 "><span class="c-red">*</span>邮箱：</label>
+            <div class="formControls col-xs-8">
+                <input type="text" class="input-text" maxlength="50" placeholder="@" name="mail" value="<#if user??>${user.mail!''}</#if>" id="mail">
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 ">微信号：</label>
-            <div class="formControls col-xs-8 ">
-                <input type="text" class="input-text" name="wechat" value="<#if user??>${user.wechat!''}</#if>" id="wechat">
+            <label class="form-label col-xs-3 "><span class="c-red">*</span>微信号：</label>
+            <div class="formControls col-xs-8">
+                <input type="text" class="input-text" maxlength="20" name="wechat" value="<#if user??>${user.wechat!''}</#if>" id="wechat">
             </div>
         </div>
         </div><div class="row cl">
-            <label class="form-label col-xs-4 ">生日：</label>
-            <div class="formControls col-xs-8 ">
+            <label class="form-label col-xs-3 "><span class="c-red">*</span>生日：</label>
+            <div class="formControls col-xs-8">
                 <input type="text" name="dirthday" value="<#if user??>${user.dirthday!''}</#if>" id="dirthday" class="input-text Wdate" style="width:120px;">
             </div>
         </div>
         <#--&lt;#&ndash;<div class="row cl">&ndash;&gt;-->
-            <#--&lt;#&ndash;<label class="form-label col-xs-4 col-sm-3">附件：</label>&ndash;&gt;-->
-            <#--&lt;#&ndash;<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">&ndash;&gt;-->
+            <#--&lt;#&ndash;<label class="form-label col-xs-3 col-sm-3">附件：</label>&ndash;&gt;-->
+            <#--&lt;#&ndash;<div class="formControls col-xs-8col-sm-9"> <span class="btn-upload form-group">&ndash;&gt;-->
 				<#--&lt;#&ndash;<input class="input-text upload-url" type="text" name="uploadfile" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">&ndash;&gt;-->
 				<#--&lt;#&ndash;<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>&ndash;&gt;-->
 				<#--&lt;#&ndash;<input type="file" multiple name="file-2" class="input-file">&ndash;&gt;-->
 				<#--&lt;#&ndash;</span> </div>&ndash;&gt;-->
         <#--&lt;#&ndash;</div>&ndash;&gt;-->
         <#--<div class="row cl">-->
-            <#--<label class="form-label col-xs-4 col-sm-3">所在城市：</label>-->
-            <#--<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">-->
+            <#--<label class="form-label col-xs-3 col-sm-3">所在城市：</label>-->
+            <#--<div class="formControls col-xs-8col-sm-9"> <span class="select-box">-->
 				<#--<select class="select" size="1" name="city">-->
 					<#--<option value="" selected>请选择城市</option>-->
 					<#--<option value="1">北京</option>-->
@@ -90,9 +97,9 @@
 				<#--</span> </div>-->
         <#--</div>-->
         <div class="row cl">
-            <label class="form-label col-xs-4 ">备注：</label>
-            <div class="formControls  col-xs-8 ">
-                <textarea name="sketch" cols="" maxlength="300"  rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" onKeyUp="$.Huitextarealength(this,100)"><#if user??>${user.sketch!''}</#if></textarea>
+            <label class="form-label col-xs-3 ">备注：</label>
+            <div class="formControls  col-xs-8">
+                <textarea name="sketch" cols="" maxlength="300"  rows="" class="textarea"  placeholder="说点什么...最少输入10个字符"><#if user??>${user.sketch!''}</#if></textarea>
             </div>
         </div>
         <div class="row cl">
