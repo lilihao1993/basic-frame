@@ -56,7 +56,7 @@
         <div class="row cl">
             <label class="form-label col-xs-3 "><span class="c-red">*</span>手机：</label>
             <div class="formControls col-xs-8">
-                <input type="text" class="input-text" maxlength="11" value="<#if user??>${user.phone!''}</#if>" placeholder="" id="mobile" name="mobile">
+                <input type="text" class="input-text" maxlength="11" value="<#if user??>${user.mobile!''}</#if>" placeholder="" id="mobile" name="mobile">
             </div>
         </div>
         <div class="row cl">
@@ -71,10 +71,11 @@
                 <input type="text" class="input-text" maxlength="20" name="wechat" value="<#if user??>${user.wechat!''}</#if>" id="wechat">
             </div>
         </div>
-        </div><div class="row cl">
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-3 "><span class="c-red">*</span>生日：</label>
             <div class="formControls col-xs-8">
-                <input type="text" name="dirthday" value="<#if user??>${user.dirthday!''}</#if>" id="dirthday" class="input-text Wdate" style="width:120px;">
+                <input type="text" name="dirthday" value="<#if user??>${user.dirthday?string('yyyy-MM-dd')}</#if>" id="dirthday" class="input-text Wdate" style="width:120px;">
             </div>
         </div>
         <#--&lt;#&ndash;<div class="row cl">&ndash;&gt;-->

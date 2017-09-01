@@ -26,7 +26,7 @@
 
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
-    <span class="l"><a href="javascript:;" class="btn btn-danger radius"><i class="icon-trash"></i> 批量删除</a>
+    <span class="l"><a href="javascript:;" id="js-batch-del" class="btn btn-danger radius"><i class="icon-trash"></i> 批量删除</a>
     <a href="javascript:;" id="js-add"  class="btn btn-primary radius"><i class="icon-plus"></i> 添加用户</a></span>
         <span class="r">共有数据：<strong>${count!''}</strong> 条</span>
     </div>

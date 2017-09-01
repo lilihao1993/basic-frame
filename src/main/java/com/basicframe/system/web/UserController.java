@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -97,7 +98,7 @@ public class UserController {
     }
 
     /**
-     * 描述：删除用户
+     * 描述：根据id删除用户
      *
      * @param id 唯一标识
      * @return
@@ -107,7 +108,21 @@ public class UserController {
     @ResponseBody
     public AjaxResult delete(@PathVariable(value = "id") String id) throws Exception {
         userService.deleteById(id);
-        return AjaxResult.success("删除成功");
+        return AjaxResult.success("删除成功!");
+    }
+
+    /**
+     * 批量删除用户
+     *
+     * @param ids id列表
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/batch_del", method = RequestMethod.POST)
+    @ResponseBody
+    public AjaxResult batchDelete(@RequestParam(value = "ids[]") List<String> ids) throws Exception {
+        userService.deleteBatchIds(ids);
+        return AjaxResult.success("删除成功！");
     }
 
     /**

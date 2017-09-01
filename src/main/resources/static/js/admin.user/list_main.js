@@ -54,7 +54,7 @@ require(['layer1',
                 {
                     targets: 0,
                     render: function (data, type, row, meta) {
-                        return '<input type="checkbox" class="checkbox"/>';
+                        return '<input type="checkbox" data-id="' + data.id + '" class="checkbox"/>';
                     }
                 }, {
                     targets: 2,
@@ -82,7 +82,6 @@ require(['layer1',
             el: '#js-add',
             event: 'click',
             handler: function () {
-                $(this).blur();
                 parent.layer.open({
                     type: 2,
                     title: ['新增用户', 'font-size:18px;color:#07538f;background:#e4f6fb;'],
@@ -94,16 +93,16 @@ require(['layer1',
                 });
             }
         }, {
-            el: '.js-edit',
+            el: '.js-modify',
             event: 'click',
             handler: function () {
                 var id = $(this).data('id');
-                layer.dialog({
+                parent.layer.open({
                     type: 2,
-                    title: ['修改采集项', 'font-size:18px;color:#07538f;background:#e4f6fb;'],
-                    area: ['560px', '300px'],
-                    content: ['/admin/system/user/modify' + id, 'no'],
-                    callback: function () {
+                    title: ['修改用户', 'font-size:18px;color:#07538f;background:#e4f6fb;'],
+                    area: ['65%', '80%'],
+                    content: ['/admin/system/user/modify/' + id],
+                    end: function () {
                         table.ajax.reload();
                     }
                 });
@@ -114,7 +113,21 @@ require(['layer1',
             handler: function () {
                 var id = $(this).data('id');
                 parent.layer.confirm("确认删除吗？", {icon: 3}, function () {
-                    _delete(id);
+                    _del(id);
+                });
+            }
+        }, {
+            el: '#js-batch-del',
+            event: 'click',
+            handler: function () {
+                //1.获取选中的所有用户id
+                var ids = new Array()
+                $('tbody :checked').each(function () {
+                    ids.push($(this).data('id'));
+                });
+                //2.批量删除
+                parent.layer.confirm("确认删除所选用户吗？", {icon: 3}, function () {
+                    _batchDel(ids);
                 });
             }
         }, {
@@ -129,7 +142,6 @@ require(['layer1',
             event: 'click',
             handler: function () {
                 //一个复选框未选，则全选复选框不勾选
-                debugger;
                 if ($(".checkbox:not(:checked)").length > 0) {
                     $('#selected').attr("checked", false);
                 } else {
@@ -145,10 +157,33 @@ require(['layer1',
      * @param id
      * @private
      */
-    function _delete(id) {
+    function _del() {
         http.httpRequest({
             url: '/admin/system/user/delete/' + id,
             type: "post",
+            success: function (data) {
+                if (data.status == 'success') {
+                    parent.layer.closeAll();
+                    table.ajax.reload();
+                } else {
+                    parent.layer.alert(data.msg);
+                }
+            },
+            error: function () {
+                parent.layer.alert('错误');
+            }
+        });
+    }
+
+    /**
+     * 批量删除用户
+     * @private
+     */
+    function _batchDel(ids) {
+        http.httpRequest({
+            url: '/admin/system/user/batch_del',
+            type: "post",
+            data: {ids: ids},
             success: function (data) {
                 if (data.status == 'success') {
                     parent.layer.closeAll();
