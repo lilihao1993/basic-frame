@@ -80,10 +80,12 @@ public class UserController {
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     @ResponseBody
     public PageResponse readList(Page<User> page, PageRequest request) throws Exception {
-        page.setCurrent(request.getDraw());
+        page.setCurrent(request.getDraw()-1);
         page.setSize(request.getLength());
         page.setRecords(userService.selectByMap(new HashMap<>()));
-        return new PageResponse(page.getCurrent(), userService.selectCount(new EntityWrapper<>()), page.getRecords());
+        int count = userService.selectCount(new EntityWrapper<>());
+        PageResponse response = new PageResponse(page.getCurrent(), count,page.getRecords());
+        return response;
     }
 
     /**

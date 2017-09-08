@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="/static/js/lib/Hui-iconfont/1.0.8/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/skin/default/skin.css" id="skin" />
     <link rel="stylesheet" type="text/css" href="/static/css/h-admin/style.css" />
-    <#--<link rel="stylesheet" href="/static/css/vendor/dataTables.bootstrap.min.css">-->
     <title>用户管理</title>
 </head>
 <body>

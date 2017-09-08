@@ -16,6 +16,7 @@ public class PageResponse<T> implements Serializable {
 
     public PageResponse(int draw, long recordsTotal, List<T> data) {
         this.draw = draw;
+        this.recordsFiltered = recordsTotal;
         this.recordsTotal = recordsTotal;
         this.data = data;
     }

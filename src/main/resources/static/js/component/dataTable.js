@@ -27,7 +27,7 @@ define(['jquery', 'dataTables.bootstrap', 'buttons.html5', 'buttons.flash', 'but
                 processing: true,
                 isScrollYShow: true,
                 language: {
-                    'processing': '<img src="/img/loading_32.gif"/>'
+                    'processing': '<img src="/static/img/loading_32.gif"/>'
                 },
                 //查询按钮元素id标识
                 searchBtnId: '#js-search',

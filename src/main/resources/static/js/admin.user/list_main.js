@@ -1,9 +1,8 @@
 require(['layer1',
     'common/util',
     'common/http',
-    'component/dataTable',
-    'mydate',
-    'laypage'], function (layer, util, http, dataTable) {
+    'datatables',
+    'mydate'], function (layer, util, http, dataTable) {
 
     init();
 
@@ -26,9 +25,8 @@ require(['layer1',
      * @private
      */
     function _initDataTable() {
-        table = dataTable.load({
+        $('#item-table').DataTable({
             //需要初始化dataTable的dom元素
-            el: '#item-table',
             ajax: {
                 url: '/admin/system/user/page',
                 data: function (data) {
