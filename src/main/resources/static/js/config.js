@@ -26,7 +26,9 @@ require.config({
         'h-jquery': 'lib/jquery/jquery-1.12.3.min',
         'laypage': 'lib/laypage/1.2/laypage',
         'icheck': 'lib/icheck/jquery.icheck.min',
-        'datatables': 'component/jquery.dataTables.min'
+        'datatables': 'component/jquery.dataTables.min',
+        'city': 'lib/jquery.provincesCity',
+        'cityData': 'lib/provincesData'
     },
     shim: {
         'bootstrap': {
@@ -78,6 +80,8 @@ require.config({
         }, 'icheck': {
             deps: ['jquery']
         }, 'datatables': {
+            deps: ['jquery']
+        }, 'city': {
             deps: ['jquery']
         }
     },

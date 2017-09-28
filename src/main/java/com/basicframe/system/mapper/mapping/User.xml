@@ -16,6 +16,7 @@
 		<result column="WECHAT" property="wechat" />
 		<result column="SKETCH" property="sketch" />
 		<result column="ENCRYPT_SALT" property="encryptSalt" />
+		<result column="STATUS" property="status" />
 		<result column="CREATE_TIME" property="createTime" />
 		<result column="OPERATE_TIME" property="operateTime" />
 	</resultMap>

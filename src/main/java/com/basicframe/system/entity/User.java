@@ -90,6 +90,11 @@ public class User extends Model<User> {
     @TableField("ENCRYPT_SALT")
     private String encryptSalt;
     /**
+     * 状态 （1：正常 2：禁用）
+     */
+    @TableField("STATUS")
+    private String status;
+    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -212,6 +217,14 @@ public class User extends Model<User> {
 
     public void setOperateTime(Date operateTime) {
         this.operateTime = operateTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

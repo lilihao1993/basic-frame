@@ -2,20 +2,18 @@ package com.basicframe.system.web;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.basicframe.common.remote.ajax.AjaxResult;
 import com.basicframe.common.remote.datatables.PageRequest;
 import com.basicframe.common.remote.datatables.PageResponse;
 import com.basicframe.system.entity.User;
 import com.basicframe.system.service.IUserService;
-import com.basicframe.system.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -80,11 +78,13 @@ public class UserController {
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     @ResponseBody
     public PageResponse readList(Page<User> page, PageRequest request) throws Exception {
-        page.setCurrent(request.getDraw()-1);
+        page.setCurrent(request.getDraw() - 1);
         page.setSize(request.getLength());
-        page.setRecords(userService.selectByMap(new HashMap<>()));
+        Wrapper wrapper = new EntityWrapper();
+        wrapper.orderBy("createTime", false);
+        page.setRecords(userService.selectList(wrapper));
         int count = userService.selectCount(new EntityWrapper<>());
-        PageResponse response = new PageResponse(page.getCurrent(), count,page.getRecords());
+        PageResponse response = new PageResponse(page.getCurrent(), count, page.getRecords());
         return response;
     }
 
@@ -139,6 +139,29 @@ public class UserController {
     public AjaxResult edit(User user) throws Exception {
         userService.editUser(user);
         return AjaxResult.success("编辑成功！");
+    }
+
+    /**
+     * 描述：更改用户状态
+     *
+     * @param id     id
+     * @param status 用户状态
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/modify_status/{id}/{status}", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public AjaxResult modifyUserStatus(@PathVariable(value = "id") String id, @PathVariable(value = "status") String status) throws Exception {
+        //1.判断该用户是否存在
+        User user = userService.selectById(id);
+        if (user == null) {
+            return AjaxResult.error("该用户不存在！");
+        }
+
+        //2.更新用户状态
+        user.setStatus(status);
+        userService.updateById(user);
+        return AjaxResult.success("用户状态更新成功！");
     }
 
 

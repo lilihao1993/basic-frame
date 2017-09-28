@@ -12,3 +12,7 @@
 .table > tbody > tr > td {
     text-align: center;
 }
+
+.ml10 {
+    margin-left: 10px;
+}

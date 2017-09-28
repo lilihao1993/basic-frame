@@ -23,7 +23,6 @@ require(['component/iframeLayer',
             submitHandler: function () {
                 //1.判断验证码是否验证成功
                 _verificationCode($("#checkCode").val());
-
             }
         });
 
@@ -114,7 +113,8 @@ require(['component/iframeLayer',
                 if (data.status == 'success') {
                     _login($('#userName').val(), $('#password').val());
                 } else {
-                    layer.alert("验证失败！");
+                    $('#verify').attr('src', '/verify?' + Math.random());
+                    layer.alert("请输入正确的验证码！",{icon: 2});
                 }
             },
             error: function () {
@@ -138,7 +138,7 @@ require(['component/iframeLayer',
                     top.location = "/admin/index";
                 } else {
                     //弹出提示框
-                    layer.alert('用户名或密码错误！');
+                    layer.alert(data.msg,{icon: 2});
                 }
             },
             error: function () {

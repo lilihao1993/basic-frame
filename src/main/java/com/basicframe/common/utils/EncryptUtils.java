@@ -76,6 +76,6 @@ public class EncryptUtils extends Md5Utils {
     }
 
     public static void main(String[] args) {
-        System.out.println(EncryptUtils.encryptPassword("llh1993824", "6206856f28573361ee38126ea0159d32"));
+        System.out.println(EncryptUtils.md5Encoder("llh1993824"));
     }
 }

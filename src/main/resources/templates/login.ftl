@@ -63,6 +63,6 @@
 </div>
 <div class="footer">Copyright 你的公司名称 by H-ui.admin v3.1</div>
 <#include "common/common.ftl">
-<script src="/static/js/login/login_main.js"></script>
+<script src="/static/js/admin/login/login_main.js"></script>
 </body>
 </html>

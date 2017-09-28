@@ -41,6 +41,18 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-3 "><span class="c-red">*</span>真实姓名：</label>
+            <div class="formControls col-xs-8">
+                <input type="text" class="input-text" maxlength="20" value="<#if user??>${user.Name!''}</#if>" placeholder="" id="name" name="name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-3 "><span class="c-red">*</span>密码：</label>
+            <div class="formControls col-xs-8">
+                <input type="password" class="input-text" maxlength="20" value="<#if user??>${user.password!''}</#if>" placeholder="" id="password" name="password">
+            </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-3 "><span class="c-red">*</span>性别：</label>
             <div class="formControls col-xs-8 skin-minimal">
                 <div class="radio-box">
@@ -78,6 +90,7 @@
                 <input type="text" name="dirthday" value="<#if user??>${user.dirthday?string('yyyy-MM-dd')}</#if>" id="dirthday" class="input-text Wdate" style="width:120px;">
             </div>
         </div>
+
         <#--&lt;#&ndash;<div class="row cl">&ndash;&gt;-->
             <#--&lt;#&ndash;<label class="form-label col-xs-3 col-sm-3">附件：</label>&ndash;&gt;-->
             <#--&lt;#&ndash;<div class="formControls col-xs-8col-sm-9"> <span class="btn-upload form-group">&ndash;&gt;-->
@@ -98,6 +111,13 @@
 				<#--</span> </div>-->
         <#--</div>-->
         <div class="row cl">
+            <label class="form-label col-xs-3 ">所在地区：</label>
+            <div class="formControls  col-xs-8">
+                <div id="province"></div>
+            </div>
+        </div>
+
+        <div class="row cl">
             <label class="form-label col-xs-3 ">备注：</label>
             <div class="formControls  col-xs-8">
                 <textarea name="sketch" cols="" maxlength="300"  rows="" class="textarea"  placeholder="说点什么...最少输入10个字符"><#if user??>${user.sketch!''}</#if></textarea>
@@ -114,6 +134,6 @@
 <script type="text/javascript" src="/static/js/lib/h-ui/H-ui.min.js"></script>
 <script type="text/javascript" src="/static/js/lib/h-admin/H-ui.admin.js"></script>
 <#include "../../common/common.ftl">
-<script src="/static/js/admin.user/edit_main.js"></script>
+<script src="/static/js/admin/user/edit_main.js"></script>
 </body>
 </html>

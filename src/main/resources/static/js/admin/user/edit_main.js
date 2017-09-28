@@ -3,6 +3,8 @@ require(['component/iframeLayer',
     'common/http',
     'laydate',
     'icheck',
+    'city',
+    'cityData',
     'jquery.validate',
     'common/validateRules',
     'jquery.serialize'], function (layer, util, http, laydate) {
@@ -14,6 +16,7 @@ require(['component/iframeLayer',
      * 初始化函数集合
      */
     function init() {
+        $("#province").ProvinceCity();
         _formValid();
         //事件绑定
         _bind();
@@ -36,6 +39,12 @@ require(['component/iframeLayer',
         $('#form-user-edit').validate({
             rules: {
                 userName: {
+                    isNotBlank: true,
+                    maxlength: 50
+                }, name: {
+                    isNotBlank: true,
+                    maxlength: 50
+                }, password: {
                     isNotBlank: true,
                     maxlength: 50
                 },
@@ -61,6 +70,12 @@ require(['component/iframeLayer',
                 userName: {
                     isNotBlank: '用户名不可为空',
                     maxlength: '用户名长度在50字符内'
+                }, name: {
+                    isNotBlank: '姓名不可为空',
+                    maxlength: '姓名长度在50字符内'
+                }, password: {
+                    isNotBlank: '密码不可为空',
+                    maxlength: '密码长度在50字符内'
                 },
                 mobile: {
                     isNotBlank: '手机号不可为空',

@@ -38,6 +38,7 @@
             <th>手机</th>
             <th>邮箱</th>
             <th>地址</th>
+            <th>状态</th>
             <th>加入时间</th>
             <th>操作</th>
         </tr>
@@ -49,7 +50,7 @@
 <#include "../../common/common.ftl">
 <!--/_footer 作为公共模版分离出去-->
 
-<script src="/static/js/admin.user/list_main.js"></script>
+<script src="/static/js/admin/user/list_main.js"></script>
 
 </body>
 </html>

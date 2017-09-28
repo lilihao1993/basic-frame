@@ -1,4 +1,4 @@
-require(['../component/iframeLayer',
+require(['../../component/iframeLayer',
     'common/util',
     'common/http',
     'jquery.validate',

@@ -18,6 +18,7 @@ require(['layer1',
 
     //查询参数声明
     var searchParams;
+
     var table;
 
     /**
@@ -25,7 +26,7 @@ require(['layer1',
      * @private
      */
     function _initDataTable() {
-        $('#item-table').DataTable({
+        table = $('#item-table').DataTable({
             //需要初始化dataTable的dom元素
             ajax: {
                 url: '/admin/system/user/page',
@@ -34,19 +35,19 @@ require(['layer1',
                     data.condition = searchParams;
                 }
             },
-            //需注意如果data没有对应的字段的，请设置为null，不然ie下会出错;
-            //className不要写成class
-            // showIndex: true,
+            ordering: false,//禁止排序
+            showIndex: true,
             scrollX: true,
             columns: [
                 {data: null, defaultContent: '', width: '5%'},
                 {data: 'userName', width: '10%'},
                 {data: 'sex', width: '5%'},
-                {data: 'mobile', width: '15%'},
-                {data: 'mail', width: '20%'},
-                {data: 'address', width: '15%'},
-                {data: 'createTime', width: '20%'},
-                {data: null, defaultContent: '', width: '10%'}
+                {data: 'mobile', width: '10%'},
+                {data: 'mail', width: '15%'},
+                {data: 'address', width: '10%'},
+                {data: 'status', width: '5%'},
+                {data: 'createTime', width: '15%'},
+                {data: null, defaultContent: '', width: '15%'}
             ],
             columnDefs: [
                 {
@@ -59,12 +60,18 @@ require(['layer1',
                     render: function (data, type, row, meta) {
                         return data == '0' ? '女' : '男';
                     }
+                }, {
+                    targets: 6,
+                    render: function (data, type, row, meta) {
+                        return data == '1' ? '正常' : '禁用';
+                    }
                 },
                 {
-                    targets: 7,
+                    targets: 8,
                     render: function (data, type, row, meta) {
                         return '<input type="button" class="js-modify btn btn-secondary size-S radius" value="修改" data-id="' + data.id + '" />&nbsp' +
-                            '<input type="button" data-id="' + data.id + '" class="js-del btn btn-danger size-S radius" value="删除" />';
+                            '<input type="button" data-id="' + data.id + '" data-status="' + data.status + '" class="js-status btn btn-secondary size-S radius" value="更改状态" />&nbsp' +
+                            '<input type="button" data-id="' + data.id + '" class="js-del btn btn-danger size-S radius" value="删除" />&nbsp';
                     }
                 }
             ]
@@ -115,6 +122,17 @@ require(['layer1',
                 });
             }
         }, {
+            el: '.js-status',
+            event: 'click',
+            handler: function () {
+                var id = $(this).data('id');
+                var statusName = $(this).data('status') == 1 ? '禁用' : '正常';
+                var status = $(this).data('status') == 1 ? '2' : '1';
+                parent.layer.confirm("确认要更改该用户状态为" + statusName + "吗？", {icon: 0}, function () {
+                    _modifyUserStatus(id, status);
+                });
+            }
+        }, {
             el: '#js-batch-del',
             event: 'click',
             handler: function () {
@@ -155,7 +173,7 @@ require(['layer1',
      * @param id
      * @private
      */
-    function _del() {
+    function _del(id) {
         http.httpRequest({
             url: '/admin/system/user/delete/' + id,
             type: "post",
@@ -182,6 +200,28 @@ require(['layer1',
             url: '/admin/system/user/batch_del',
             type: "post",
             data: {ids: ids},
+            success: function (data) {
+                if (data.status == 'success') {
+                    parent.layer.closeAll();
+                    table.ajax.reload();
+                } else {
+                    parent.layer.alert(data.msg);
+                }
+            },
+            error: function () {
+                parent.layer.alert('错误');
+            }
+        });
+    }
+
+    /**
+     * 更改用户状态
+     * @private
+     */
+    function _modifyUserStatus(id, status) {
+        http.httpRequest({
+            url: '/admin/system/user/modify_status/' + id + '/' + status,
+            type: "post",
             success: function (data) {
                 if (data.status == 'success') {
                     parent.layer.closeAll();
